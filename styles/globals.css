@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Basic body styling */
+body {
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Raleway', sans-serif;
+}
+
+/* Styling for headlines using Playfair Display font */
+.headline {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Centered container for various elements */
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Keywords input styling */
+.keywords-input {
+  border: 2px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  min-height: 48px;
+  width: 300px;
+}
+
+.keywords-input input {
+  flex: 1;
+  border: none;
+  height: 46px;
+  font-size: 14px;
+  padding: 4px 8px;
+}
+
+.keywords-input .tag {
+  width: auto;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  padding: 0 8px;
+  font-size: 14px;
+  list-style: none;
+  border-radius: 6px;
+  background-color: #007BFF;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.keywords-input input:focus {
+  outline: none;
+}
+
+.keywords-input .tag .remove-btn {
+  display: inline-block;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+/* Styling for forms within YouTube */
+.youtube-form {
+  width: 80%;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+}
+
+.form-section {
+  margin-bottom: 20px;
+}
+
+.form-section label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-section input,
+.form-section textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-section textarea {
+  height: 100px;
+}
+
+/* Social media icons specific colors */
+.facebook-icon {
+  color: #1877F2;
+}
+
+.instagram-icon {
+  color: #E4405F;
+}
+
+.twitter-icon {
+  color: #1DA1F2;
+}
+
+.linkedin-icon {
+  color: #0A66C2;
+}
+
+.share-icons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.share-icons svg {
+  font-size: 24px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+/* Tag container styles */
+.tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 10px;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  background-color: #eee;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.tag:hover {
+  background-color: #ddd;
+  /* Darker on hover */
+}
+
+.close-icon {
+  display: inline-block;
+  margin-left: 10px;
+  cursor: pointer;
+  color: #666;
+}
+
+.close-icon:hover {
+  color: #333;
+  /* Darker color on hover */
+}
+
+.extract {
+  cursor: pointer;
+}
+
+.generated-titles-container {
+  margin-top: 20px;
+  background: #f8f8f8;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.select-all-checkbox,
+.title-checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 5px;
+  background: white;
+  border: 1px solid #ddd;
+}
+
+.select-all-checkbox span,
+.title-checkbox span {
+  margin-left: 8px;
+}
+
+.copy-icon {
+  margin-left: 10px;
+  cursor: pointer;
+  color: #007bff;
+}
+
+.alert-warning {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+
+.btn-danger {
+  background-color: red;
+  color: white;
+}
+
+.nav-link {
+  display: block;
+  padding: .5rem 1rem;
+  color: red;
+  text-decoration: none;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  color: #fff;
+  background-color: red;
+}
+
+@media (max-width: 600px) {
+  .btn {
+    width: auto !important;
+    ;
+    margin-top: 10px !important
+  }
+}
+h1{
+  font-size: 1.8em;
+  font-weight: bold;
+}
+h2{
+  font-size: 1.5em;
+  font-weight: bold;
+}
+h3{
+  font-size: 1.2em;
+  font-weight: bold;
+}
+/* Style for unordered list */
+ul {
+  list-style-type: disc; /* Use disc style for bullet points */
+  margin-bottom: 20px; /* Add some spacing between lists */
+}
+
+/* Style for ordered list */
+ol {
+  list-style-type: decimal; /* Use decimal numbering for ordered lists */
+  margin-bottom: 20px; /* Add some spacing between lists */
+}
+
+/* Style for list items */
+li {
+  margin-bottom: 5px; /* Add spacing between list items */
+}
+
+/* Style for anchor tags */
+a {
+  color: blue; /* Change anchor color as needed */
+}
