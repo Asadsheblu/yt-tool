@@ -63,6 +63,13 @@ const Layout = ({ children }) => {
               </p>
             </Link>
           )}
+          {user && user.role === 'admin' && (
+            <Link href="/dashboard/content">
+              <p className={`flex items-center mt-4 py-2 px-6 ${isActiveRoute('/dashboard/terms') ? 'bg-gray-300 text-gray-700' : 'text-gray-600 hover:bg-gray-200 hover:text-gray-700'}`}>
+                <FaFileAlt className="mr-3" /> <span className="mx-3">Tools Content</span>
+              </p>
+            </Link>
+          )}
           {user && (
             <Link href="/user/profile">
               <p className={`flex items-center mt-4 py-2 px-6 ${isActiveRoute('/user/profile') ? 'bg-gray-300 text-gray-700' : 'text-gray-600 hover:bg-gray-200 hover:text-gray-700'}`}>

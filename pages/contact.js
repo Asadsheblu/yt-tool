@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { FaUser, FaEnvelope, FaRegFileAlt, FaPaperPlane } from 'react-icons/fa';
-import contact from "../public/login.svg"
+import contact from "../public/login.svg";
 import Image from 'next/image';
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -11,6 +12,7 @@ export default function Contact() {
   });
 
   const [responseMessage, setResponseMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,6 +24,7 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const response = await fetch('/api/send-contact', {
@@ -46,6 +49,8 @@ export default function Contact() {
     } catch (error) {
       console.error('Error submitting the form:', error);
       setResponseMessage('An error occurred. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -109,8 +114,9 @@ export default function Contact() {
             <button
               type="submit"
               className="w-full py-3 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+              disabled={loading}
             >
-              Submit
+              {loading ? 'Submitting...' : 'Submit'}
             </button>
           </form>
           {responseMessage && <p className="mt-4 text-green-500">{responseMessage}</p>}

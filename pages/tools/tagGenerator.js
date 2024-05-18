@@ -19,20 +19,17 @@ const TagGenerator = () => {
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
     const [selectAll, setSelectAll] = useState(false);
     const [generateCount, setGenerateCount] = useState(0);
-    const [content, setContent] = useState([]);
-    const [loading, setLoading] = useState([]);
+    const [content, setContent] = useState('');
 
     useEffect(() => {
         const fetchContent = async () => {
             try {
-                const response = await fetch('/api/content');
+                const response = await fetch(`/api/content?category=tagGenerator`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch content');
                 }
                 const data = await response.json();
-             
-                
-                if (Array.isArray(data) && data.length > 0 && data[0].content) {
+                if (data && data.length > 0 && data[0].content) {
                     const sanitizedContent = sanitizeHtml(data[0].content, {
                         allowedTags: ['h2', 'h3', 'p', 'li', 'a'],
                         allowedAttributes: {
@@ -41,11 +38,10 @@ const TagGenerator = () => {
                     });
                     setContent(sanitizedContent);
                 } else {
-                    toast.error("Content data is invalid:", data);
+                    toast.error("Content data is invalid");
                 }
             } catch (error) {
-                toast.error("Error fetching content:", error);
-                setError(error.message);
+                toast.error("Error fetching content");
             }
         };
 
@@ -299,87 +295,86 @@ const TagGenerator = () => {
                     <div dangerouslySetInnerHTML={{ __html: content }}></div>
                 </div>
             </div>
-            <style jsx>{styles}</style>
+            <style jsx>{`
+              .keywords-input-container {
+                border: 2px solid #ccc;
+                padding: 10px;
+                border-radius: 10px;
+                display: flex;
+                align-items: flex-start;
+                flex-wrap: wrap;
+                min-height: 100px;
+                margin: auto;
+                width: 100%;
+                max-width: 600px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                background-color: #fff;
+            }
+        
+            .tags-container {
+                display: flex;
+                flex-wrap: wrap;
+                margin-bottom: 8px;
+            }
+        
+            .tag {
+                display: flex;
+                align-items: center;
+                color: #fff;
+                background-color: #0d6efd;
+                border-radius: 6px;
+                padding: 5px 10px;
+                margin-right: 8px;
+                margin-bottom: 8px;
+                font-size: 14px;
+            }
+        
+            .remove-btn {
+                margin-left: 8px;
+                cursor: pointer;
+                font-weight: bold;
+            }
+        
+            .input-box {
+                flex: 1;
+                border: none;
+                height: 40px;
+                font-size: 16px;
+                padding: 8px;
+                border-radius: 6px;
+                width: 100%;
+                box-sizing: border-box;
+                outline: none;
+                margin-top: 8px;
+            }
+        
+            .input-box::placeholder {
+                color: #aaa;
+            }
+        
+            @media (max-width: 600px) {
+                .keywords-input-container {
+                    width: 100%;
+                    padding: 8px;
+                }
+        
+                .input-box {
+                    height: 35px;
+                    font-size: 14px;
+                    padding: 6px;
+                }
+            }
+        
+            .generated-tags-display {
+                background-color: #f2f2f2;
+                border-radius: 8px;
+                padding: 10px;
+                margin-top: 20px;
+            }
+            `}</style>
         </div>
     );
 };
 
-const styles = `
-    .keywords-input-container {
-        border: 2px solid #ccc;
-        padding: 10px;
-        border-radius: 10px;
-        display: flex;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        min-height: 100px;
-        margin: auto;
-        width: 100%;
-        max-width: 600px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        background-color: #fff;
-    }
-
-    .tags-container {
-        display: flex;
-        flex-wrap: wrap;
-        margin-bottom: 8px;
-    }
-
-    .tag {
-        display: flex;
-        align-items: center;
-        color: #fff;
-        background-color: #0d6efd;
-        border-radius: 6px;
-        padding: 5px 10px;
-        margin-right: 8px;
-        margin-bottom: 8px;
-        font-size: 14px;
-    }
-
-    .remove-btn {
-        margin-left: 8px;
-        cursor: pointer;
-        font-weight: bold;
-    }
-
-    .input-box {
-        flex: 1;
-        border: none;
-        height: 40px;
-        font-size: 16px;
-        padding: 8px;
-        border-radius: 6px;
-        width: 100%;
-        box-sizing: border-box;
-        outline: none;
-        margin-top: 8px;
-    }
-
-    .input-box::placeholder {
-        color: #aaa;
-    }
-
-    @media (max-width: 600px) {
-        .keywords-input-container {
-            width: 100%;
-            padding: 8px;
-        }
-
-        .input-box {
-            height: 35px;
-            font-size: 14px;
-            padding: 6px;
-        }
-    }
-
-    .generated-tags-display {
-        background-color: #f2f2f2;
-        border-radius: 8px;
-        padding: 10px;
-        margin-top: 20px;
-    }
-`;
-
 export default TagGenerator;
+

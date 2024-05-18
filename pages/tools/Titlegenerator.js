@@ -19,20 +19,19 @@ const TitleGenerator = () => {
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
     const [selectAll, setSelectAll] = useState(false);
     const [generateCount, setGenerateCount] = useState(0);
-    const [content, setContent] = useState([]);
+  
     const [loading, setLoading] = useState([]);
+    const [content, setContent] = useState('');
 
     useEffect(() => {
         const fetchContent = async () => {
             try {
-                const response = await fetch('/api/content');
+                const response = await fetch(`/api/content?category=Titlegenerator`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch content');
                 }
                 const data = await response.json();
-              
-                
-                if (Array.isArray(data) && data.length > 0 && data[0].content) {
+                if (data && data.length > 0 && data[0].content) {
                     const sanitizedContent = sanitizeHtml(data[0].content, {
                         allowedTags: ['h2', 'h3', 'p', 'li', 'a'],
                         allowedAttributes: {
@@ -41,16 +40,16 @@ const TitleGenerator = () => {
                     });
                     setContent(sanitizedContent);
                 } else {
-                    toast.error("Content data is invalid:", data);
+                    toast.error("Content data is invalid");
                 }
             } catch (error) {
-                toast.error("Error fetching content:", error);
-                setError(error.message);
+                toast.error("Error fetching content");
             }
         };
 
         fetchContent();
     }, []);
+
 
     useEffect(() => {
         if (!isLoggedIn) {
